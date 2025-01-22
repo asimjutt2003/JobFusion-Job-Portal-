@@ -1,0 +1,157 @@
+{% extends "app/base2.html" %}
+{% block content %}
+{% load static %}
+<section href="{% url 'findjob' %}" class="py-5 bg-image overlay-primary fixed overlay" id="next" style="background-image: url('images/hero_1.jpg');">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-7 text-center">
+          <br>
+          <br>
+          <h2 class="section-title mb-2 text-white"> Find a Job </h2>
+        </div>
+      </div>
+      <div class="row pb-0 block__19738 section-counter">
+
+        <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <strong class="number" data-number="1930">0</strong>
+          </div>
+          <span class="caption">Candidates</span>
+        </div>
+
+        <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <strong class="number" data-number="54">0</strong>
+          </div>
+          <span class="caption">Jobs Posted</span>
+        </div>
+
+        <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <strong class="number" data-number="120">0</strong>
+          </div>
+          <span class="caption">Jobs Filled</span>
+        </div>
+
+        <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <strong class="number" data-number="550">0</strong>
+          </div>
+          <span class="caption">Companies</span>
+        </div>
+
+          
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="site-section">
+    <div class="container">
+
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-7 text-center">
+          <h2 class="section-title mb-2">43,167 Job Listed</h2>
+        </div>
+      </div>
+      
+      <ul class="job-listings mb-5">
+        {% if all_job %}
+        {% for i in all_job %}
+        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+          <a href="{% url 'jobapply' pk=i.id %}"></a>
+          <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+              <h2>{{i.jobnames}}</h2>
+              <strong>{{i.companynames}}</strong>
+            </div>
+            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+              <span class="icon-room"></span> {{i.locations}}
+            </div>
+          </div>
+        </li>
+        {% endfor %} 
+        {% endif %} 
+      </ul>
+
+      <div class="row pagination-wrap">
+        <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+          <span>Showing 1-7 Of 43,167 Jobs</span>
+        </div>
+        <div class="col-md-6 text-center text-md-right">
+          <div class="custom-pagination ml-auto">
+            <a href="#" class="prev">Prev</a>
+            <div class="d-inline-block">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            </div>
+            <a href="#" class="next">Next</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('images/hero_1.jpg');">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h2 class="text-white">Looking For A Job?</h2>
+          <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci impedit.</p>
+        </div>
+        <div class="col-md-3 ml-auto">
+          <a href="#" class="btn btn-warning btn-block btn-lg">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="site-section py-4">
+    <div class="container">
+
+      <div class="row align-items-center">
+        <div class="col-12 text-center mt-4 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+              <h2 class="section-title mb-2">Company We've Helped</h2>
+              <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_mailchimp.svg' %}" alt="Image" class="img-fluid logo-1">
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_paypal.svg' %}" alt="Image" class="img-fluid logo-2">
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_stripe.svg' %}" alt="Image" class="img-fluid logo-3">
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_visa.svg' %}" alt="Image" class="img-fluid logo-4">
+        </div>
+
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_apple.svg' %}" alt="Image" class="img-fluid logo-5">
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="images/logo_tinder.svg" alt="Image" class="img-fluid logo-6">
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_sony.svg' %}" alt="Image" class="img-fluid logo-7">
+        </div>
+        <div class="col-6 col-lg-3 col-md-6 text-center">
+          <img src="{% static 'images/logo_airbnb.svg' %}" alt="Image" class="img-fluid logo-8">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock %}

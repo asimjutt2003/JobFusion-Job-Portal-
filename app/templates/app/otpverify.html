@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Verify OTP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{% static 'css/custom-bs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/line-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/quill.snow.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body id="top">
+
+<div class="site-wrap">
+
+    <header class="site-navbar mt-3">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="site-logo col-6"><a href="#">JobFusion</a></div>
+                <nav class="mx-auto site-navigation">
+                    <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+                        <li><a href="home" class="nav-link">Home</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-hero overlay inner-page bg-image" id="home-section"> 
+         <!-- style="background-image: url('{% static 'images/hero_1.jpg' %}');" -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">Log In</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="home'">Home</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Log In</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Verify Your OTP</h2>
+                    <div>
+                        <center>
+                            {% if msg %}
+                            <h4 style="color: red">{{msg}}</h4>
+                            {% endif %}
+                        </center>
+                    </div>
+                    <form action="{% url 'otp' %}" method="post" class="p-4 border rounded">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="text-black" for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required value="{{email}}" readonly>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="text-black" for="password">You OTP</label>
+                            <input type="text" id="password" name="otp" class="form-control" placeholder="Enter Your OTP" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="OTP Verify" class="btn px-4 btn-primary text-white">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

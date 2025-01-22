@@ -1,0 +1,47 @@
+</div>{% extends "app/company/base2.html" %}
+{% block content %}
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Job Post List</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{% url 'CompanyIndex' %}">Home</a></li>
+                        <li class="breadcrumb-item active">Candidate Apply List</li>
+                    </ol>
+                    <div class="card mb-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <tfoot>
+                                <thead>
+                                    <tr>
+                                        <th>Job Name</th>
+                                        <th>Candidate Name</th>
+                                        <th>Location</th>
+                                        <th>Gender</th>
+                                        <th>Experience</th>
+                                        <th>Salary Package</th>
+                                        
+                                    </tr>
+                                </thead>
+                                </tfoot>
+                                {% if all_job %}
+                                <tbody>
+                                    {% for i in all_job %}
+                                    <tr>
+                                        <td>{{i.job.jobnames}}</td>
+                                        <td>{{i.candidate.firstname}} {{i.candidate.lastname}}</td>
+                                        <td>{{i.job.locations}}</td>
+                                        <td>{{i.gender}}</td>
+                                        <td>{{i.job.experiences}}</td>
+                                        <td>{{i.Salary}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </main>
+            {% endblock %}

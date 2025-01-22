@@ -1,0 +1,158 @@
+{% extends "app/base2.html" %}
+{% block content %}
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="text-white font-weight-bold">
+              {% if role == 'Candidate' %}Candidate Profile{% elif role == 'Company' %}Company Profile{% else %}Profile{% endif %}
+            </h1>
+            <div class="custom-breadcrumbs">
+              <a href="#">Home</a> <span class="mx-2 slash">/</span>
+              <a href="#">Job</a> <span class="mx-2 slash">/</span>
+              <span class="text-white"><strong>
+                {% if role == 'Candidate' %}Candidate Profile{% elif role == 'Company' %}Company Profile{% else %}Profile{% endif %}
+              </strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section">
+      <div class="container">
+
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <div>
+                <h2>Update Your Profile</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-lg-12">
+            {% if role == 'Candidate' %}
+            <form class="p-4 p-md-5 border rounded" action="{% url 'updateprofiles' pk=user.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3 class="text-black mb-5 border-bottom pb-2">Candidate Profile Details</h3>
+                
+                <div class="form-group">
+                    <label for="image">Upload Your Image</label> <br>
+                    <label class="btn btn-primary btn-md btn-file">
+                        Browse File<input name="image" type="file" hidden>
+                    </label>
+                </div>
+            
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="{{ profile.firstname }}">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ profile.lastname }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="{{ user.email }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="dob">Select Date of Birth</label>
+                    <input type="date" class="form-control" name="dob" id="dob" placeholder="DoB" value="{{ profile.dob }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="gender" id="gender" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Gender">
+                        <option value="Male" {% if can.gender == "Male" %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if can.gender == "Female" %}selected{% endif %}>Female</option>
+                        <option value="Prefer Not to Say" {% if can.gender == "Prefer Not to Say" %}selected{% endif %}>Prefer Not to Say</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact" value="{{ profile.contact }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" id="state" name="state" placeholder="State" value="{{ profile.state }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City" value="{{ profile.city }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{ profile.address }}">
+                </div>
+            
+                <button type="submit" class="btn btn-primary btn-md">Save Profile</button>
+            </form>
+            {% elif role == 'Company' %}
+            <form class="p-4 p-md-5 border rounded" action="{% url 'updateprofiles' pk=user.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3 class="text-black mb-5 border-bottom pb-2">Company Profile Details</h3>
+                
+                <div class="form-group">
+                    <label for="logo">Upload Your Logo</label> <br>
+                    <label class="btn btn-primary btn-md btn-file">
+                        Browse File<input name="logo" name="image" type="file" hidden>
+                    </label>
+                </div>
+            
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="{{ profile.firstname }}">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ profile.lastname }}">
+                </div>
+                <div class="form-group">
+                    <label for="company_name">Company Name</label>
+                    <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{{ profile.company_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="{{ user.email }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact" value="{{ profile.contact }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" id="state" name="state" placeholder="State" value="{{ profile.state }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City" value="{{ profile.city }}">
+                </div>
+            
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{ profile.address }}">
+                </div>
+            
+                <button type="submit" class="btn btn-primary btn-md">Save Profile</button>
+            </form>
+            {% else %}
+            <p>Invalid role.</p>
+            {% endif %}
+            
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

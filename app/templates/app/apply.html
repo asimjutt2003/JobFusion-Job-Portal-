@@ -1,0 +1,101 @@
+{% extends "app/base2.html" %}
+
+{% block content %}
+<section class="section-hero overlay inner-page bg-image" id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">Job Apply Form</h1>
+        <div class="custom-breadcrumbs">
+          <a href="#">Home</a> <span class="mx-2 slash">/</span>
+          <a href="#">Job</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>Job Apply Form</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="site-section">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="d-flex align-items-center">
+          <div>
+            <h2>Update Your Profile</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-lg-12">
+        {% if user and cand and job %}
+        <form class="p-4 p-md-5 border rounded" action="{% url 'apply' pk=job.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 class="text-black mb-5 border-bottom pb-2">Candidate Apply Form</h3>
+            {% if msg %}
+            <h4 style="color: green;">{{ msg }}</h4>
+            {% endif %}
+            {% if error %}
+            <h4 style="color: red;">{{ error }}</h4>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="resume">Upload Your Resume <span style="color: red;">*</span></label>
+                <label class="btn btn-primary btn-md btn-file">
+                    Browse File <input name="resume" type="file" required>
+                </label>
+            </div>
+        
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="{{ cand.firstname }}">
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ cand.lastname }}">
+            </div>
+        
+            <div class="form-group">
+                <label for="jobname">Job Name</label>
+                <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Job Name" value="{{ job.jobnames }}">
+            </div>
+
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" class="form-control" id="location" name="location" placeholder="Location" value="{{ job.locations }}">
+            </div>
+        
+            <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact" value="{{ cand.contact }}">
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="text" class="form-control" id="salary" name="salary" placeholder="Salary" value="{{ job.salarypackages }}">
+            </div>
+            <div class="form-group">
+                <label for="experiences">Experiences</label>
+                <input type="text" class="form-control" id="experiences" name="experiences" placeholder="Experiences" value="{{ job.experiences }}">
+            </div>
+        
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender" name="gender">
+                    <option value="Male" {% if cand.gender == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if cand.gender == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if cand.gender == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+        
+            <button type="submit" class="btn btn-primary btn-md">Save Profile</button>
+        </form>
+        {% else %}
+            <p>Form data is missing. Please ensure you are logged in and have all required information.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

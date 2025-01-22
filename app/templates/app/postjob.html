@@ -1,0 +1,89 @@
+{% extends "app/company/base1.html" %}
+{% block content %}
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">Post a Job</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    {% if msg %}
+                        <h4 style="color: green;">{{ msg }}</h4>
+                    {% endif %}
+                    {% if error_msg %}
+                        <h4 style="color: red;">{{ error_msg }}</h4>
+                    {% endif %}
+                    <form class="p-4 p-md-5 border rounded" action="{% url 'jobpostpage' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
+
+                        <div class="form-group">
+                            <label for="jobname">Job Title <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Job Title" value="{{ form_data.jobname|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyname">Company Name <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="companyname" name="companyname" placeholder="Company Name" value="{{ form_data.companyname|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyaddress">Company Address</label>
+                            <input type="text" class="form-control" id="companyaddress" name="companyaddress" placeholder="Company Address" value="{{ form_data.companyaddress|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Upload Your Logo</label> <br>
+                            <label class="btn btn-primary btn-md btn-file">
+                                Browse File<input name="image" type="file" hidden>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobdescription">Job Description</label>
+                            <input type="text" class="form-control" id="jobdescription" name="jobdescription" placeholder="Job Description" value="{{ form_data.jobdescription|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="qualification">Qualification <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Qualification" value="{{ form_data.qualification|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="resposibilties">Responsibilities <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="resposibilties" name="resposibilties" placeholder="Responsibilities" value="{{ form_data.resposibilties|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Location" value="{{ form_data.location|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="companywebsite">Company Website</label>
+                            <input type="text" class="form-control" id="companywebsite" name="companywebsite" placeholder="Company Website" value="{{ form_data.companywebsite|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyemail">Company Email</label>
+                            <input type="text" class="form-control" id="companyemail" name="companyemail" placeholder="Company Email" value="{{ form_data.companyemail|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="companycontact">Company Contact</label>
+                            <input type="text" class="form-control" id="companycontact" name="companycontact" placeholder="Company Contact" value="{{ form_data.companycontact|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="salarypackage">Salary Package <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="salarypackage" name="salarypackage" placeholder="Salary Package" value="{{ form_data.salarypackage|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="experiences">Experience <span style="color: red;">*</span></label>
+                            <input type="number" class="form-control" id="experiences" name="experiences" placeholder="Experience" value="{{ form_data.experiences|default_if_none:'' }}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-md">Post a Job</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
